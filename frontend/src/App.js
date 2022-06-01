@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -20,9 +19,6 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    fetch("/webapp/callback").then((res) => console.log(res));
-  }, [test]);
   return (
     <div className="App container py-3">
       <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
