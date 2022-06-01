@@ -10,7 +10,7 @@ function App() {
     <div className="App container py-3">
       <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
         <Navbar.Brand href="/" className="font-weight-bold text-muted">
-          Spotify
+          Spotify Social
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
