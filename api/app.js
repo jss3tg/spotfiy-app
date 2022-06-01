@@ -16,6 +16,9 @@ const scopes = "user-read-private user-read-email";
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var webRouter = require("./routes/webapp");
+var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/users");
+var forumRouter = require("./routes/forum");
 
 var app = express();
 
@@ -48,6 +51,9 @@ app.use("/users", usersRouter);
 app.use("/webapp", webRouter);
 
 app.use(express.json());
+app.use("/", indexRouter);
+app.use("/users", usersRouter);
+app.use("/forum", forumRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
