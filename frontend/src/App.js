@@ -1,3 +1,6 @@
+import "./App.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -6,6 +9,16 @@ import Routes from "./Routes";
 import "./App.css";
 
 function App() {
+  const [test, setTest] = useState();
+
+  const clickHandler = () => {
+    fetch("http://localhost:9000/webapp")
+      .then((res) => res.json())
+      .then((data) => {
+        window.open(data.url);
+      });
+  };
+
   return (
     <div className="App container py-3">
       <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
