@@ -1,28 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
 
 function Login(props) {
     const {setUser} = props;
-    const [currUser, setCurrUser] = useState();
+    const userRef = useRef();
     // const [password, setPassword] = useState("");
 
-
-    function handleSubmit(event) {
-        event.preventDefault();
-        setUser(currUser);
+    const getUsername = (e) => {
+        e.preventDefault()
+        const val = userRef.current.value;
+        setUser(val)
+        console.log(val)
     }
+    
     return(
     <div className="Login">
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={getUsername}>
             <Form.Group size="lg" controlId="user">
             <Form.Label>Username</Form.Label>
             <Form.Control
                 autoFocus
                 type="name"
-                value={currUser}
-                onChange={(e) => setCurrUser(e.target.value)}
+                ref={userRef}
             />
             </Form.Group>
             <Button block="true" type="submit" >

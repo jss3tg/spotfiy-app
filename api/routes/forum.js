@@ -26,7 +26,8 @@ router.post('/post', async (req, res) => {
         console.log(req.body)
         const ref = await addDoc(collection(db, 'forum'),{
             title: req.body.title,
-            desc: req.body.desc
+            desc: req.body.desc,
+            likes: req.body.likes
         })
         console.log('Document written with id', ref.id)
         return res.status(201).json({post: 'Post successful'})
@@ -35,4 +36,22 @@ router.post('/post', async (req, res) => {
         return res.status(500).send(error)
     }
 })
+
+router.put('/post', async (req, res) => {
+    try{
+        console.log(req.body.id)
+        const msgRef = doc(db, "forum", req.body.id);
+
+        const update = await updateDoc(msgRef, {likes: req.body.likes} )
+
+        return res.status(200).json({
+            likes: 'Likes updated'
+        })
+    } catch(error){
+        console.log(error)
+        return res.status(500).send(error)
+    }
+})
+
+
 module.exports = router;
