@@ -5,8 +5,8 @@ import axios from 'axios';
 
 function PostText() {
     const onSubmit = (e) => {
-        e.preventDefault();
-        const obj ={title: e.target.title.value, desc:e.target.desc.value}
+        const likeCount = 0;
+        const obj ={title: e.target.title.value, desc:e.target.desc.value, likes:likeCount}
         submitPost(obj);
     }
     const submitPost = (msg) => {
