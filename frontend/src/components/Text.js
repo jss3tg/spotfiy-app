@@ -1,35 +1,71 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import axios from 'axios';
+import React from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { Grid } from "@material-ui/core";
+//import { Card } from "react-bootstrap";
+import { Card } from "@material-ui/core";
+import axios from "axios";
 import { LinkContainer } from "react-router-bootstrap";
+import { IconButton } from "@mui/material";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 function Text(props) {
-    const {id, title, desc, likes} = props.data
-    console.log(props)
-    const updatePost = () => {
-        const likeCount = likes + 1;
-        console.log(likeCount)
-        axios.put('http://localhost:9000/forum/post', {
-            id: id,
-            likes: likeCount}
-        )
-    }
-    return(
-        <>
+  const { id, title, desc, likes } = props.data;
+
+  const updatePost = () => {
+    const likeCount = likes + 1;
+    console.log(likeCount);
+    axios.put("http://localhost:9000/forum/post", {
+      id: id,
+      likes: likeCount,
+    });
+  };
+
+  const downvotePost = () => {
+    const likeCount = likes - 1;
+    console.log(likeCount);
+    axios.put("http://localhost:9000/forum/post", {
+      id: id,
+      likes: likeCount,
+    });
+  };
+  return (
+    <>
+      <Card
+        variant="outlined"
+        style={{
+          margin: "10px",
+          borderWidth: "5px",
+          borderColor: "black",
+        }}
+      >
+        <Grid container>
+          <Grid item xs={6} style={{ marginTop: "10px" }}>
             <h4>{title}</h4>
             <p>{desc}</p>
-            <p>{likes}</p>
+          </Grid>
+          <Grid item xs={6} style={{ marginTop: "10px" }}>
             <Form onSubmit={updatePost}>
-            <Button variant="primary" type="submit">
-                Upvote
-            </Button>
+              <IconButton color="success" type="submit">
+                <KeyboardArrowUpIcon />
+              </IconButton>
             </Form>
-            <LinkContainer to="/forum-post">
-              <Button>Discussion</Button>
-            </LinkContainer>
-        </>
-    )
+            <p>{likes}</p>
+            <Form onSubmit={downvotePost}>
+              <IconButton color="success" type="submit">
+                <KeyboardArrowDownIcon />
+              </IconButton>
+            </Form>
+          </Grid>
+        </Grid>
+
+        <LinkContainer to="/forum-post">
+          <Button>Discussion</Button>
+        </LinkContainer>
+      </Card>
+    </>
+  );
 }
 
-export default Text
+export default Text;
