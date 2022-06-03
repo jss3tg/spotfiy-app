@@ -6,7 +6,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 function Text(props) {
     const {id, title, desc, likes} = props.data
-
+    console.log(props)
     const updatePost = () => {
         const likeCount = likes + 1;
         console.log(likeCount)

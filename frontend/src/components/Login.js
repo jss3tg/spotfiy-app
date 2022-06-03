@@ -27,7 +27,6 @@ function Login(props) {
         getUser();
     }, [])
 
-    console.log(user)
     return(
         <>
         <div className = "Login"> 
