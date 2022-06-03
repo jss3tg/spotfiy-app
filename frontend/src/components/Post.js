@@ -18,6 +18,7 @@ function filterPosts(posts, query) {
 
 function Post(props) {
     const {data} = props;
+    console.log(data)
     const { search } = window.location;
     const query = new URLSearchParams(search).get('s');
     const [searchQuery, setSearchQuery] = useState(query || '');

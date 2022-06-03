@@ -2,20 +2,16 @@ import logo from "./logo.png";
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { LinkContainer } from "react-router-bootstrap";
+import EditProfile from './EditProfile';
 
 function Profile(props) {
+    const [showForm, setShowForm] = useState(false);
+    const showEditForm = () => {
+      setShowForm(!showForm);
+    }
     const [user, setUser] = useState()
     const {username, userList} = props;
-    useEffect(() => {
-        async function getPost(){
-            const response = await fetch('/people');
-            const body = await response.json();
-            setUser(body);
-            console.log('body', body);
-        }
-        getPost();
-    }, [])
-    
+    console.log(userList)
     function filterUser(users, query) {
       if (!query) {
           return null;
@@ -26,9 +22,11 @@ function Profile(props) {
       });
   }
     const loggedUser = filterUser(userList, username)
-    console.log(loggedUser)
     return (
     <>
+    <div style={{ display: 'none' }}>
+      {userList && userList.map(update => <EditProfile key={update.id} data={update}/>)}
+    </div>
     <p> currently logged in as {username}</p>
       <div className="container emp-profille">
         <form method="">
@@ -75,7 +73,7 @@ function Profile(props) {
             
           </div>
           <LinkContainer to="/edit-profile">
-              <Button>Edit Profile</Button>
+              <Button onClick={showEditForm}>Edit Profile</Button>
             </LinkContainer>
 
           <div className="row">
@@ -132,6 +130,9 @@ function Profile(props) {
             </div>
           </div>
         </form>
+        {showForm && (
+          <EditProfile />
+        )}
       </div>
     </>
   );
