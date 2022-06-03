@@ -48,9 +48,9 @@ function App() {
               <LinkContainer to="/login">
                 <Nav.Link>Profile</Nav.Link>
               </LinkContainer>
-            <LinkContainer to="/inbox">
+              {/* <LinkContainer to="/inbox">
               <Nav.Link>Inbox</Nav.Link>
-            </LinkContainer>
+            </LinkContainer> */}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
