@@ -6,15 +6,7 @@ import { LinkContainer } from "react-router-bootstrap";
 function Profile(props) {
     const [user, setUser] = useState()
     const {username, userList} = props;
-    useEffect(() => {
-        async function getPost(){
-            const response = await fetch('/people');
-            const body = await response.json();
-            setUser(body);
-            console.log('body', body);
-        }
-        getPost();
-    }, [])
+    console.log(username)
     
     function filterUser(users, query) {
       if (!query) {
@@ -26,7 +18,6 @@ function Profile(props) {
       });
   }
     const loggedUser = filterUser(userList, username)
-    console.log(loggedUser)
     return (
     <>
     
