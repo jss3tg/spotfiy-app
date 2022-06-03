@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Grid } from "@material-ui/core";
@@ -11,7 +11,10 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 function Text(props) {
-  const { id, title, desc, likes } = props.data;
+  const { id, title, desc, likes, replies } = props.data;
+  const [clicked, setClicked] = useState();
+
+  console.log(replies);
 
   const updatePost = () => {
     const likeCount = likes + 1;
@@ -30,6 +33,16 @@ function Text(props) {
       likes: likeCount,
     });
   };
+
+  const respond = (rply) => {
+    console.log(rply);
+    replies.push(rply);
+    console.log(replies);
+    axios.put("http://localhost:9000/forum/reply", {
+      id: id,
+      replies: replies,
+    });
+  };
   return (
     <>
       <Card
@@ -37,11 +50,11 @@ function Text(props) {
         style={{
           margin: "10px",
           borderWidth: "5px",
-          borderColor: "black",
+          borderColor: "#1DB954",
         }}
       >
         <Grid container>
-          <Grid item xs={6} style={{ marginTop: "10px" }}>
+          <Grid item xs={6} style={{ marginTop: "30px" }}>
             <h4>{title}</h4>
             <p>{desc}</p>
           </Grid>
@@ -51,7 +64,7 @@ function Text(props) {
                 <KeyboardArrowUpIcon />
               </IconButton>
             </Form>
-            <p>{likes}</p>
+            <p style={{ margin: "2px" }}>{likes}</p>
             <Form onSubmit={downvotePost}>
               <IconButton color="success" type="submit">
                 <KeyboardArrowDownIcon />
@@ -60,9 +73,33 @@ function Text(props) {
           </Grid>
         </Grid>
 
-        <LinkContainer to="/forum-post">
-          <Button>Discussion</Button>
-        </LinkContainer>
+        {!clicked && (
+          <Button onClick={() => setClicked(true)}>See Replies</Button>
+        )}
+        {clicked && (
+          <Button onClick={() => setClicked(false)}>Hide Replies</Button>
+        )}
+
+        {clicked &&
+          replies &&
+          replies.map((r) => {
+            <p>{r}</p>;
+          })}
+
+        {clicked && (
+          <Card>
+            <p>
+              Post A Reply: <input id="responder" />{" "}
+              <input
+                type="submit"
+                value="Post"
+                onClick={() =>
+                  respond(document.getElementById("responder").value)
+                }
+              />
+            </p>
+          </Card>
+        )}
       </Card>
     </>
   );

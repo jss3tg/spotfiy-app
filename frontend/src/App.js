@@ -42,11 +42,11 @@ function App() {
               <LinkContainer to="/forum">
                 <Nav.Link>Forum</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/profile">
+              {/* <LinkContainer to="/profile">
                 <Nav.Link>Profile</Nav.Link>
-              </LinkContainer>
+              </LinkContainer> */}
               <LinkContainer to="/login">
-                <Nav.Link>Login</Nav.Link>
+                <Nav.Link>Profile</Nav.Link>
               </LinkContainer>
             </Nav>
           </Navbar.Collapse>

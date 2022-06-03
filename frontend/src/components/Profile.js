@@ -1,35 +1,26 @@
 import logo from "./logo.png";
-import React, { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import React, { useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { LinkContainer } from "react-router-bootstrap";
+import Login from "./Login";
 
 function Profile(props) {
-    const [user, setUser] = useState()
-    const {username, userList} = props;
-    useEffect(() => {
-        async function getPost(){
-            const response = await fetch('/people');
-            const body = await response.json();
-            setUser(body);
-            console.log('body', body);
-        }
-        getPost();
-    }, [])
-    
-    function filterUser(users, query) {
-      if (!query) {
-          return null;
-      }
-      return users.filter((usr) => {
-          const userName = usr.username;
-          return userName.includes(query);
-      });
+  const [user, setUsername] = useState();
+  const { username, userList } = props;
+  console.log(username);
+  function filterUser(users, query) {
+    if (!query) {
+      return null;
+    }
+    return users.filter((usr) => {
+      const userName = usr.username;
+      return userName.includes(query);
+    });
   }
-    const loggedUser = filterUser(userList, username)
-    console.log(loggedUser)
-    return (
+  const loggedUser = filterUser(userList, username);
+  return (
     <>
-    <p> currently logged in as {username}</p>
       <div className="container emp-profille">
         <form method="">
           <div className="row">
@@ -37,15 +28,15 @@ function Profile(props) {
               <img src={logo} alt="Logo" />
             </div>
             <div className="col-md-6">
-            
-             
-                <h5>
-                    {username}
-                </h5>
-            
-              <h6>Spotify Social Account</h6>
-              <p className="profile-rating mt-3 mb-5"> Status: Basic/Premium</p>
-
+              <h5 style={{ color: "#1DB954" }}> {username}</h5>
+              <p>Spotify Social Account</p>
+              <p
+                className="profile-rating mt-3 mb-5"
+                style={{ color: "#1DB954" }}
+              >
+                {" "}
+                Status: Premium
+              </p>
               <ul className="nav nav-tabs" role="tablist">
                 <li className="nav-item">
                   <a
@@ -71,17 +62,38 @@ function Profile(props) {
                 </li>
               </ul>
             </div>
-
-            
           </div>
-          <LinkContainer to="/edit-profile">
-              <Button>Edit Profile</Button>
-            </LinkContainer>
-
+          <div>
+            <div className="col-md-4">
+              <LinkContainer to="/edit-profile">
+                <Button>Edit Profile</Button>
+              </LinkContainer>
+            </div>
+          </div>
           <div className="row">
             <div className="col-md-4">
               <div className="profile-work">
                 <p></p>
+
+                <label style={{ color: "#1DB954" }}>
+                  <strong>Followers:</strong>
+                </label>
+                <p>
+                  {loggedUser &&
+                    loggedUser.map((user) => (
+                      <p key={user.id}>{user.followers}</p>
+                    ))}{" "}
+                </p>
+
+                <label style={{ color: "#1DB954" }}>
+                  <strong>Following:</strong>
+                </label>
+                <p>
+                  {loggedUser &&
+                    loggedUser.map((user) => (
+                      <p key={user.id}>{user.following}</p>
+                    ))}{" "}
+                </p>
               </div>
             </div>
             <div className="col-md-8 pl-5 about-info">
@@ -94,37 +106,55 @@ function Profile(props) {
                 >
                   <div className="row">
                     <div className="col-md-2">
-                      <label>Username</label>
+                      <label style={{ color: "#1DB954" }}>
+                        <strong>Username</strong>
+                      </label>
                     </div>
                     <div className="col-md-6">
-                    {loggedUser && loggedUser.map (user => 
-                <p key={user.id}>
-                    {user.username}
-                </p>
-                    )}
+                      {loggedUser &&
+                        loggedUser.map((user) => (
+                          <p key={user.id}>{user.username}</p>
+                        ))}
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-md-2">
-                      <label>Name</label>
+                      <label style={{ color: "#1DB954" }}>
+                        {" "}
+                        <strong>Name</strong>
+                      </label>
                     </div>
                     <div className="col-md-6">
-                    {loggedUser && loggedUser.map (user => 
-                <p key={user.id}>
-                    {user.name}
-                </p>
-            )}
+                      {loggedUser &&
+                        loggedUser.map((user) => (
+                          <p key={user.id}>{user.name}</p>
+                        ))}
                     </div>
                     <div className="row">
                       <div className="col-md-2">
-                        <p>Email</p>
+                        <label style={{ color: "#1DB954" }}>
+                          <strong>Email</strong>
+                        </label>
                       </div>
                       <div className="col-md-6">
-                      {loggedUser && loggedUser.map (user => 
-                <p key={user.id}>
-                    {user.email}
-                </p>
-            )}                      </div>
+                        {loggedUser &&
+                          loggedUser.map((user) => (
+                            <p key={user.id}>{user.email}</p>
+                          ))}{" "}
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-2">
+                        <label style={{ color: "#1DB954" }}>
+                          <strong>Phone Number</strong>
+                        </label>
+                      </div>
+                      <div className="col-md-6">
+                        {loggedUser &&
+                          loggedUser.map((user) => (
+                            <p key={user.id}>{user.phoneNumber}</p>
+                          ))}{" "}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -135,6 +165,5 @@ function Profile(props) {
       </div>
     </>
   );
-};
-
+}
 export default Profile;
