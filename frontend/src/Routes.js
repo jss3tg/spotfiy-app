@@ -5,6 +5,8 @@ import Forum from "./components/Forum";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
+import InnerForum from './components/InnerForum';
+import EditProfile from './components/EditProfile.js';
 
 export default function Links() {
   return (
@@ -14,6 +16,8 @@ export default function Links() {
         <Route path="forum" element={<Forum />} />
         <Route path="profile" element={<Profile/>} />
         <Route path="login" element={<Login/>} />
+        <Route path="forum-post" element={<InnerForum/>}/>
+        <Route path="edit-profile" element={<EditProfile/>}/>
     </Routes>
   );
 }

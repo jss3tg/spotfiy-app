@@ -1,9 +1,11 @@
 import logo from "./logo.png";
 import React, { useEffect, useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import { LinkContainer } from "react-router-bootstrap";
 
 function Profile(props) {
     const [user, setUser] = useState()
-
+    const {username, userList} = props;
     useEffect(() => {
         async function getPost(){
             const response = await fetch('/people');
@@ -13,9 +15,22 @@ function Profile(props) {
         }
         getPost();
     }, [])
-
+    
+    function filterUser(users, query) {
+      if (!query) {
+          return null;
+      }
+      return users.filter((usr) => {
+          const userName = usr.username;
+          return userName.includes(query);
+      });
+  }
+    const loggedUser = filterUser(userList, username)
+    console.log(loggedUser)
     return (
     <>
+    
+    <p> currently logged in as {username}</p>
       <div className="container emp-profille">
         <form method="">
           <div className="row">
@@ -23,12 +38,11 @@ function Profile(props) {
               <img src={logo} alt="Logo" />
             </div>
             <div className="col-md-6">
-            
-            {user && user.map (user => 
-                <h5 key={user.id}>
-                    {user.username}
+             
+                <h5>
+                    {username}
                 </h5>
-            )}
+            
               <h6>Spotify Social Account</h6>
               <p className="profile-rating mt-3 mb-5"> Status: Basic/Premium</p>
 
@@ -56,18 +70,13 @@ function Profile(props) {
                   </a>
                 </li>
               </ul>
-            </div>
-
-            <div className="col-md-2">
-              <input
-                type="submit"
-                className="profile-edit-btn"
-                name="btn"
-                value="Edit Profile"
-              />
-            </div>
+            </div>            
           </div>
-
+          <div className="col-md-2">
+          <LinkContainer to="/edit-profile">
+              <Button>Edit Profile</Button>
+            </LinkContainer>
+            </div>
           <div className="row">
             <div className="col-md-4">
               <div className="profile-work">
@@ -87,11 +96,11 @@ function Profile(props) {
                       <label>Username</label>
                     </div>
                     <div className="col-md-6">
-                    {user && user.map (user => 
+                    {loggedUser && loggedUser.map (user => 
                 <p key={user.id}>
                     {user.username}
                 </p>
-            )}
+                    )}
                     </div>
                   </div>
                   <div className="row">
@@ -99,7 +108,7 @@ function Profile(props) {
                       <label>Name</label>
                     </div>
                     <div className="col-md-6">
-                    {user && user.map (user => 
+                    {loggedUser && loggedUser.map (user => 
                 <p key={user.id}>
                     {user.name}
                 </p>
@@ -110,7 +119,7 @@ function Profile(props) {
                         <p>Email</p>
                       </div>
                       <div className="col-md-6">
-                      {user && user.map (user => 
+                      {loggedUser && loggedUser.map (user => 
                 <p key={user.id}>
                     {user.email}
                 </p>
