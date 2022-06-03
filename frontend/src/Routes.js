@@ -9,6 +9,7 @@ import AccessToken from "./contexts/AccessToken";
 import Stats from "./components/Stats";
 import InnerForum from "./components/InnerForum";
 import EditProfile from "./components/EditProfile.js";
+import Inbox from "./components/Inbox";
 
 export default function Links() {
   return (
@@ -22,6 +23,7 @@ export default function Links() {
         <Route path="login" element={<Login />} />
         <Route path="forum-post" element={<InnerForum />} />
         <Route path="edit-profile" element={<EditProfile />} />
+        <Route path="inbox" element={<Inbox/>} />
       </Routes>
     </AccessToken>
   );
