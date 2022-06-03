@@ -51,17 +51,17 @@ export default function Home() {
   return (
     <div className="Home">
       <div className="lander">
-        <h1>Home</h1>
+        <h1>Welcome</h1>
 
         <p className="text-muted">Log into your Spotify account:</p>
         <button onClick={() => clickHandler()}>Log In</button>
 
-        <p className="text-muted">Check out your Spotify</p>
+        {/* <p className="text-muted">Check out your Spotify</p>
         {username ? (
           user && <Profile username={username} userList={user} />
         ) : (
           <Login setUsername={setUsername} />
-        )}
+        )} */}
       </div>
     </div>
   );

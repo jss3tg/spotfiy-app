@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AccessTokenContext } from "../contexts/AccessToken";
-import LikedSongs from "./LikedSongs";
 import { Card, CardGroup, Button } from "react-bootstrap";
 import axios from "axios";
 import "./Stats.css";
@@ -47,9 +46,11 @@ function Stats() {
     <>
       <div className="stats">
         <div style={{ textAlign: "center", color: "black" }}>
-          <h1>{name}'s Spotify Stats</h1>
+          <h1>Hello, {name}</h1>
+          <h4>[{id}]</h4>
           <Button
             style={{
+              fontFamily: "Poppins",
               backgroundColor: "white",
               color: "black",
               borderColor: "#1DB954",
@@ -58,7 +59,7 @@ function Stats() {
             onClick={() => window.open(profile, "_blank")}
           >
             {" "}
-            Spotify Profile
+            Go to Spotify Profile
           </Button>
         </div>
         <div
@@ -69,41 +70,6 @@ function Stats() {
           }}
         >
           <CardGroup>
-            <div className="liked-songs">
-              {
-                <Card
-                  className="card"
-                  style={{ borderColor: "#1DB954", borderWidth: "5px" }}
-                >
-                  <Card.Header>
-                    <h3 style={{ color: "#1DB954" }}>Liked Songs</h3>
-                  </Card.Header>
-                  <Card.Body>
-                    {likedSongs &&
-                      likedSongs.map((song) => {
-                        return (
-                          <>
-                            <p style={{ textAlign: "left" }}>
-                              <img
-                                src={song.track.album.images[2].url}
-                                style={{ margin: "5px" }}
-                              />
-                              <a
-                                href={song.track.external_urls.spotify}
-                                target="_blank"
-                              >
-                                {song.track.name}
-                              </a>{" "}
-                              - {song.track.artists[0].name}
-                            </p>
-                          </>
-                        );
-                      })}
-                  </Card.Body>
-                </Card>
-              }
-            </div>
-
             <div className="top-songs">
               <Card
                 className="card"
@@ -160,6 +126,41 @@ function Stats() {
                     })}
                 </Card.Body>
               </Card>
+            </div>
+
+            <div className="liked-songs">
+              {
+                <Card
+                  className="card"
+                  style={{ borderColor: "#1DB954", borderWidth: "5px" }}
+                >
+                  <Card.Header>
+                    <h3 style={{ color: "#1DB954" }}>Liked Songs</h3>
+                  </Card.Header>
+                  <Card.Body>
+                    {likedSongs &&
+                      likedSongs.map((song) => {
+                        return (
+                          <>
+                            <p style={{ textAlign: "left" }}>
+                              <img
+                                src={song.track.album.images[2].url}
+                                style={{ margin: "5px" }}
+                              />
+                              <a
+                                href={song.track.external_urls.spotify}
+                                target="_blank"
+                              >
+                                {song.track.name}
+                              </a>{" "}
+                              - {song.track.artists[0].name}
+                            </p>
+                          </>
+                        );
+                      })}
+                  </Card.Body>
+                </Card>
+              }
             </div>
           </CardGroup>
         </div>
