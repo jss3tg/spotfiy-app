@@ -64,7 +64,7 @@ function Text(props) {
                 <KeyboardArrowUpIcon />
               </IconButton>
             </Form>
-            <p style={{ margin: "2px" }}>{likes}</p>
+            <h4 style={{ margin: "2px" }}>{likes}</h4>
             <Form onSubmit={downvotePost}>
               <IconButton color="success" type="submit">
                 <KeyboardArrowDownIcon />
@@ -73,7 +73,7 @@ function Text(props) {
           </Grid>
         </Grid>
 
-        {!clicked && (
+        {/* {!clicked && (
           <Button onClick={() => setClicked(true)}>See Replies</Button>
         )}
         {clicked && (
@@ -99,7 +99,7 @@ function Text(props) {
               />
             </p>
           </Card>
-        )}
+              ) */}
       </Card>
     </>
   );

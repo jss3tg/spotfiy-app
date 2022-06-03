@@ -34,7 +34,7 @@ function Login(props) {
             <Form.Group size="lg" controlId="user">
               <Form.Label>Enter Your Username:</Form.Label>
               <p>
-                <Form.Control autoFocus type="name" ref={userRef} />{" "}
+                <Form.Control autoFocus type="name" ref={userRef} required />{" "}
                 <Button
                   type="submit"
                   style={{

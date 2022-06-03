@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { LinkContainer } from "react-router-bootstrap";
 import EditProfile from "./EditProfile";
+import { Helmet } from "react-helmet";
 
 function Profile(props) {
   const [showForm, setShowForm] = useState(false);
@@ -25,13 +26,16 @@ function Profile(props) {
   const loggedUser = filterUser(userList, username);
   return (
     <>
+      <Helmet>
+        <title>Profile</title>
+      </Helmet>
       <div style={{ display: "none" }}>
         {userList &&
           userList.map((update) => (
             <EditProfile key={update.id} data={update} />
           ))}
       </div>
-      <p> currently logged in as {username}</p>
+      {/* <p> Currently Logged in as {username}</p> */}
       <div className="container emp-profille">
         <form method="">
           <div className="row">
@@ -60,7 +64,7 @@ function Profile(props) {
                     General Information
                   </a>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <a
                     className="nav-link"
                     id="settings-tab"
@@ -70,7 +74,7 @@ function Profile(props) {
                   >
                     Settings
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
