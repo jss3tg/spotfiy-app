@@ -55,23 +55,25 @@ function Discover() {
     return(
         <>
             <h4>Discover</h4>
-            {user && user.map (user => 
-                <div key={user.id}>
-                  <Link to={`/forum/${user.id}`}>
-                    <Card variant={"outlined"}sx={{ maxWidth: 345, margin:"2rem"}}>                      
-                        <CardHeader
-                            avatar={
-                            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                                {user.username[0]}
-                            </Avatar>
-                            }
-                            title={user.username}
-                            subheader="September 14, 2016"
-                        />                      
-                    </Card>
-                  </Link>
-                </div>
-            )}
+            <div style={{display: 'flex',  justifyContent:'center', height: '100vh'}}>
+              {user && user.map (user => 
+                  <div key={user.id}>
+                    <Link to={`/forum/${user.id}`}>
+                      <Card variant={"outlined"}sx={{ maxWidth: 345, margin:"2rem"}}>                      
+                          <CardHeader
+                              avatar={
+                              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                                  {user.username[0]}
+                              </Avatar>
+                              }
+                              title={user.username}
+                              subheader="September 14, 2016"
+                          />                      
+                      </Card>
+                    </Link>
+                  </div>
+              )}
+            </div>
         </>
     )
 }
