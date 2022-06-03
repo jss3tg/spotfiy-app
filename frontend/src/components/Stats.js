@@ -3,6 +3,7 @@ import { AccessTokenContext } from "../contexts/AccessToken";
 import { Card, CardGroup, Button } from "react-bootstrap";
 import axios from "axios";
 import "./Stats.css";
+import { Helmet } from "react-helmet";
 function Stats() {
   const { accessToken, setAccessToken } = useContext(AccessTokenContext);
   const [topSongs, setTopSongs] = useState();
@@ -44,6 +45,9 @@ function Stats() {
 
   return (
     <>
+      <Helmet>
+        <title>Stats</title>
+      </Helmet>
       <div className="stats">
         <div style={{ textAlign: "center", color: "black" }}>
           <h1>Hello, {name}</h1>

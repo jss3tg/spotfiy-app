@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { LinkContainer } from "react-router-bootstrap";
 import EditProfile from "./EditProfile";
+import { Helmet } from "react-helmet";
 
 function Profile(props) {
   const [showForm, setShowForm] = useState(false);
@@ -25,6 +26,9 @@ function Profile(props) {
   const loggedUser = filterUser(userList, username);
   return (
     <>
+      <Helmet>
+        <title>Profile</title>
+      </Helmet>
       <div style={{ display: "none" }}>
         {userList &&
           userList.map((update) => (
