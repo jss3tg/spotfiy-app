@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import CardActionArea from '@mui/material/CardActionArea';
 import Avatar from '@material-ui/core/Avatar'
 import Card from '@mui/material/Card';
-import { styled } from '@mui/material/styles';
 import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
-import Collapse from '@mui/material/Collapse';
 import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography';
-import { Row, Item } from '@mui-treasury/components/flex'
-import { Info, InfoTitle, InfoSubtitle } from '@mui-treasury/components/info';
-import { useTutorInfoStyles } from '@mui-treasury/styles/info/tutor';
 import { useSizedIconButtonStyles } from '@mui-treasury/styles/iconButton/sized';
 import { useDynamicAvatarStyles } from '@mui-treasury/styles/avatar/dynamic';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import { red } from '@mui/material/colors'; 
-
+import Routes from "/Users/davidvincent/Desktop/spotify-app/spotfiy-app-1/frontend/src/Routes.js"
 const useBasicProfileStyles = makeStyles({
    root: {     
      display: 'flex',     
@@ -66,17 +57,19 @@ function Discover() {
             <h4>Discover</h4>
             {user && user.map (user => 
                 <div key={user.id}>
-                    <Card variant={"outlined"}sx={{ maxWidth: 345, margin:"2rem"}}>
-                    <CardHeader
-                        avatar={
-                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                            {user.username[0]}
-                        </Avatar>
-                        }
-                        title={user.username}
-                        subheader="September 14, 2016"
-                    />
+                  <Link to={`/forum/${user.id}`}>
+                    <Card variant={"outlined"}sx={{ maxWidth: 345, margin:"2rem"}}>                      
+                        <CardHeader
+                            avatar={
+                            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                                {user.username[0]}
+                            </Avatar>
+                            }
+                            title={user.username}
+                            subheader="September 14, 2016"
+                        />                      
                     </Card>
+                  </Link>
                 </div>
             )}
         </>
