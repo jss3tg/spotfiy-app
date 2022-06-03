@@ -5,8 +5,6 @@ import Profile from "./Profile";
 import Login from "./Login";
 import "./Home.css";
 
-import "./Home.css";
-
 export default function Home() {
   const navigate = useNavigate();
   const { accessToken, setAccessToken } = useContext(AccessTokenContext);
