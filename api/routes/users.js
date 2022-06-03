@@ -9,7 +9,7 @@ var dotenv = require("dotenv").config();
 router.get("/likedsongs/", async (req, res, next) => {
   try {
     console.log(req.query.token);
-    const url = "https://api.spotify.com/v1/me/tracks?offset=0&limit=5";
+    const url = "https://api.spotify.com/v1/me/tracks?offset=0&limit=10";
     const data = await fetch(url, {
       headers: { Authorization: "Bearer " + req.query.token },
     })
@@ -17,7 +17,7 @@ router.get("/likedsongs/", async (req, res, next) => {
       .then((res) => res.json())
       .then((data) => data);
 
-    console.log(data);
+    //console.log(data);
     res.status(200).json(data);
   } catch (err) {
     console.log(err);
@@ -28,7 +28,7 @@ router.get("/likedsongs/", async (req, res, next) => {
 router.get("/topsongs", async (req, res, next) => {
   try {
     console.log(req.query.token);
-    const url = "https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5";
+    const url = "https://api.spotify.com/v1/me/top/tracks?offset=0&limit=10";
     const data = await fetch(url, {
       headers: { Authorization: "Bearer " + req.query.token },
     })
@@ -36,7 +36,7 @@ router.get("/topsongs", async (req, res, next) => {
       .then((res) => res.json())
       .then((data) => data);
 
-    console.log(data);
+    //console.log(data);
     res.status(200).json(data);
   } catch (err) {
     console.log(err);
@@ -47,7 +47,26 @@ router.get("/topsongs", async (req, res, next) => {
 router.get("/topartists", async (req, res, next) => {
   try {
     console.log(req.query.token);
-    const url = "https://api.spotify.com/v1/me/top/artists?offset=0&limit=5";
+    const url = "https://api.spotify.com/v1/me/top/artists?offset=0&limit=10";
+    const data = await fetch(url, {
+      headers: { Authorization: "Bearer " + req.query.token },
+    })
+      .catch((err) => console.log(err))
+      .then((res) => res.json())
+      .then((data) => data);
+
+    // console.log(data);
+    res.status(200).json(data);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
+router.get("/profile", async (req, res, next) => {
+  try {
+    console.log(req.query.token);
+    const url = "https://api.spotify.com/v1/me/";
     const data = await fetch(url, {
       headers: { Authorization: "Bearer " + req.query.token },
     })
@@ -62,5 +81,4 @@ router.get("/topartists", async (req, res, next) => {
     res.status(500).send(err);
   }
 });
-
 module.exports = router;
